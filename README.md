@@ -3,8 +3,8 @@ A LobbyCore for your PMMP server!
 
 ## Features
 
-- [ ] Customizable Config!
-- [ ] Join and Leave Message!
+- [x] Customizable Config!
+- [x] Join and Leave Message!
 - [ ] Teleporter!
 - [ ] Only Proxy Join!
 - [ ] GuardianOnJoin!
