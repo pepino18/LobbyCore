@@ -1,0 +1,10 @@
+# Configuration File for LobbyCore!
+# Made by TheRealKizu :P
+
+
+# Join and Leave Message Section
+
+# Custom Join and Leave Message Toggle
+# Enables and Disables the Join and Leave Message
+# Options: true | false
+enable-joinandleave: false
