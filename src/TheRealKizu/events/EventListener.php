@@ -21,6 +21,8 @@ declare(strict_types=1);
 namespace TheRealKizu\events;
 
 use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\utils\Config;
 use TheRealKizu\LobbyCore;
 
 class EventListener implements Listener {
@@ -33,5 +35,18 @@ class EventListener implements Listener {
     public function __construct(LobbyCore $main) {
         $this->main = $main;
         $this->main->getServer()->getPluginManager()->registerEvents($this, $main);
+    }
+
+    public function onJoin(PlayerJoinEvent $joinEvent) {
+        $p = $joinEvent->getPlayer();
+        $cfg = new Config($this->main->getDataFolder() . "config.yml", Config::YAML);
+        if ($cfg->get("enable-joinandleave") === "false") return;
+        if ($cfg->get("enable-joinandleave") === "disable") {
+            $joinEvent->setJoinMessage("");
+        }
+        if ($cfg->get("enable-joinandleave") === "true") {
+            $joinMsg = str_replace(["{name}", "&"], [$joinEvent->getPlayer()->getName(), "§"], $cfg->get("join-message"));
+            $joinEvent->setJoinMessage($joinMsg);
+        }
     }
 }

@@ -6,5 +6,11 @@
 
 # Custom Join and Leave Message Toggle
 # Enables and Disables the Join and Leave Message
-# Options: true | false
+# Options: true | false | disable
 enable-joinandleave: false
+
+# Join Message
+# Set's the specified join message!
+# & - Color
+# {name} - Player Name
+join-message: "&bHi, &e{name}"
