@@ -22,6 +22,8 @@ namespace TheRealKizu\events;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerPreLoginEvent;
+use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\utils\Config;
 use TheRealKizu\LobbyCore;
 
@@ -40,13 +42,38 @@ class EventListener implements Listener {
     public function onJoin(PlayerJoinEvent $joinEvent) {
         $p = $joinEvent->getPlayer();
         $cfg = new Config($this->main->getDataFolder() . "config.yml", Config::YAML);
-        if ($cfg->get("enable-joinandleave") === "false") return;
-        if ($cfg->get("enable-joinandleave") === "disable") {
+        if ($cfg->get("enable-joinandleave") === "disable") return;
+        if ($cfg->get("enable-joinandleave") === "false") {
             $joinEvent->setJoinMessage("");
         }
         if ($cfg->get("enable-joinandleave") === "true") {
             $joinMsg = str_replace(["{name}", "&"], [$joinEvent->getPlayer()->getName(), "§"], $cfg->get("join-message"));
             $joinEvent->setJoinMessage($joinMsg);
+        }
+    }
+
+    public function onQuit(PlayerQuitEvent $quitEvent) {
+        $p = $quitEvent->getPlayer();
+        $cfg = new Config($this->main->getDataFolder() . "config.yml", Config::YAML);
+        if ($cfg->get("enable-joinandleave") === "disable") return;
+        if ($cfg->get("enable-joinandleave") === "false") {
+            $quitEvent->setQuitMessage("");
+        }
+        if ($cfg->get("enable-joinandleave") === "true") {
+            $quitMsg = str_replace(["{name}", "&"], [$quitEvent->getPlayer()->getName(), "§"], $cfg->get("leave-message"));
+            $quitEvent->setQuitMessage($quitMsg);
+        }
+    }
+
+    public function onNotProxyJoin(PlayerPreLoginEvent $preLoginEvent) {
+        $p = $preLoginEvent->getPlayer();
+        $cfg = new Config($this->main->getDataFolder() . "config.yml", Config::YAML);
+        if ($cfg->get("enable-proxyjoin") === "false") return;
+        if ($cfg->get("enable-proxyjoin") === "true") {
+            if ($p->getAddress() !== $cfg->get("proxy-address")) {
+                $kickMsg = str_replace(["&"], ["§"], $cfg->get("proxy-kickmessage"));
+                $p->kick($kickMsg);
+            }
         }
     }
 }

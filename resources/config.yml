@@ -14,3 +14,19 @@ enable-joinandleave: false
 # & - Color
 # {name} - Player Name
 join-message: "&bHi, &e{name}"
+
+# Leave Message
+# Set's the specified leave message!
+# & - Color
+# {name} - Player Name
+leave-message: "&bBye, &e{name}"
+
+# -----[PROXY}-----
+# Enable only proxy join
+enable-proxyjoin: false
+# Proxy IP
+proxy-address: 192.168.0.1
+# Kick Message
+# Message if player didnt joined on Proxy server
+# & - Color
+proxy-kickmessage: "&cPlease join the main server"
