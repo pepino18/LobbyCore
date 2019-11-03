@@ -89,5 +89,5 @@ class EventListener implements Listener {
                 $level->addSound(new AnvilFallSound($player->asVector3()));
             }
         }
-	}
+    }
 }
