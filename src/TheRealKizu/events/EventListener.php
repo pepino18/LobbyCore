@@ -76,4 +76,18 @@ class EventListener implements Listener {
             }
         }
     }
+    
+    //ProjectileHP Code by LichKing112 <3
+    public function onDamage(EntityDamageEvent $e){
+        if ($e->getCause() === EntityDamageByEntityEvent::CAUSE_PROJECTILE){
+            $player = $e->getDamager();
+            $level = $player->getLevel();
+            if ($player instanceof Player){
+                $health = $e->getEntity()->getHealth();
+                $entity = $e->getEntity()->getNameTag();
+                $player->sendMessage(TextFormat::YELLOW . "$entity §6Is On§c $health §6HP§b ❤");
+                $level->addSound(new AnvilFallSound($player->asVector3()));
+            }
+        }
+    }
 }
