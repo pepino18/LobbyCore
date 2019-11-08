@@ -20,10 +20,15 @@ declare(strict_types=1);
 
 namespace TheRealKizu\events;
 
+use pocketmine\Player;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
+use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\event\player\PlayerQuitEvent;
+use pocketmine\level\sound\AnvilFallSound;
+use pocketmine\math\Vector3;
 use pocketmine\utils\Config;
 use TheRealKizu\LobbyCore;
 
@@ -85,7 +90,7 @@ class EventListener implements Listener {
             if ($player instanceof Player){
                 $health = $e->getEntity()->getHealth();
                 $entity = $e->getEntity()->getNameTag();
-                $player->sendMessage(TextFormat::YELLOW . "$entity §6Is On§c $health §6HP§b ❤");
+                $player->sendMessage("§c$entity §eis on §c$health HP!");
                 $level->addSound(new AnvilFallSound($player->asVector3()));
             }
         }
