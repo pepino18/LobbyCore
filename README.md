@@ -5,8 +5,9 @@ A LobbyCore for your PMMP server!
 
 - [x] Customizable Config!
 - [x] Join and Leave Message!
-- [ ] Teleporter!
 - [x] Only Proxy Join!
+- [ ] Lobby Items!
+- [ ] Teleporter!
 - [ ] GuardianOnJoin!
 - [ ] Spawn Particle!
 
