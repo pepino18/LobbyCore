@@ -28,7 +28,6 @@ use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\level\sound\AnvilFallSound;
-use pocketmine\math\Vector3;
 use pocketmine\utils\Config;
 use TheRealKizu\LobbyCore;
 

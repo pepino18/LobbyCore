@@ -32,7 +32,8 @@ class LobbyCore extends PluginBase {
         if (!$this->isPhar()) {
             $this->getLogger()->notice("Found plugin using folder structure! Please compile for production use!");
         }
-        if ($this->getDescription()->getAuthors() !== "TheRealKizu") {
+
+        if ($this->getDescription()->getAuthors() !== "TheRealKizu" || $this->getDescription()->getName() !== "LobbyCore") {
             $this->getLogger()->critical("Illegal modification of plugin! Contact @TheRealKizu on Twitter!");
             $this->getServer()->shutdown();
         }
@@ -40,7 +41,7 @@ class LobbyCore extends PluginBase {
 
     public function onDisable() {
         foreach ($this->getServer()->getOnlinePlayers() as $player) {
-            $player->transfer("mc.exynos.us.to", 19132);
+            $player->transfer("play.pixelbe.cf", 19132);
         }
     }
 

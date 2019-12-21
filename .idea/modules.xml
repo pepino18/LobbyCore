@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../../Workspace/ExynosX/.idea/ExynosX.iml" filepath="$PROJECT_DIR$/../../Workspace/ExynosX/.idea/ExynosX.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/LobbyCore.iml" filepath="$PROJECT_DIR$/.idea/LobbyCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../PHP Workspace/PMMP SRC/.idea/PMMP SRC.iml" filepath="$PROJECT_DIR$/../../PHP Workspace/PMMP SRC/.idea/PMMP SRC.iml" />
     </modules>
   </component>
 </project>
