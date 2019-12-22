@@ -1,18 +1,27 @@
 # LobbyCore
 A LobbyCore for your PMMP server!
 
-## Features
+### Features
 
-- [x] Customizable Config!
-- [x] Join and Leave Message!
-- [x] Only Proxy Join!
-- [ ] Lobby Items!
-- [ ] Teleporter!
-- [ ] GuardianOnJoin!
-- [ ] Spawn Particle!
+> Lobby Items
+- [ ] Navigator
+    - [ ] Config
+    - [ ] Teleport Name
+    - [ ] Infinite Slots
+- [ ] Profile
+- [ ] Fly
 
-## Support
+> Events
+- [X] Custom Join and Leave Message
+- [X] No Break Block (Permission: lc.break)
+- [X] No Place Block (Permission: lc.place)
+- [X] No Drop Item (Permission: lc.drop)
+
+> Server Side
+- [X] Only Proxy Join
+
+### Support
 
 Suggestions? Bugs? Need help? Join my server down below!
 
-<a href="https://discord.gg/Uey3p68"><img src="https://discordapp.com/api/guilds/638310885118574602/embed.png" alt="Discord Server"/></a>
+<a href="https://discord.gg/hWt3XxF"><img src="https://discordapp.com/api/guilds/638310885118574602/embed.png" alt="Discord Server"/></a>
