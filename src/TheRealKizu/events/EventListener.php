@@ -20,6 +20,8 @@ declare(strict_types=1);
 
 namespace TheRealKizu\events;
 
+use pocketmine\event\player\PlayerInteractEvent;
+use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
@@ -29,6 +31,7 @@ use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\level\sound\AnvilFallSound;
 use pocketmine\utils\Config;
+use pocketmine\utils\TextFormat;
 use TheRealKizu\LobbyCore;
 
 class EventListener implements Listener {
@@ -45,6 +48,7 @@ class EventListener implements Listener {
 
     public function onJoin(PlayerJoinEvent $joinEvent) {
         $p = $joinEvent->getPlayer();
+        //Join Message
         $cfg = new Config($this->main->getDataFolder() . "config.yml", Config::YAML);
         if ($cfg->get("enable-joinandleave") === "disable") return;
         if ($cfg->get("enable-joinandleave") === "false") {
@@ -54,6 +58,15 @@ class EventListener implements Listener {
             $joinMsg = str_replace(["{name}", "&"], [$joinEvent->getPlayer()->getName(), "§"], $cfg->get("join-message"));
             $joinEvent->setJoinMessage($joinMsg);
         }
+
+        //Lobby Items
+        $inv = $p->getInventory();
+
+        //TODO: Understand this part!
+        $navigator = Item::get(Item::COMPASS);
+        $navigator->setCustomName("§r§aNavigator");
+
+        $inv->setItem(4, $navigator);
     }
 
     public function onQuit(PlayerQuitEvent $quitEvent) {
@@ -92,6 +105,16 @@ class EventListener implements Listener {
                 $player->sendMessage("§c$entity §eis on §c$health HP!");
                 $level->addSound(new AnvilFallSound($player->asVector3()));
             }
+        }
+    }
+
+    //Interact Event aka The Largest Event :P
+    public function onInteract(PlayerInteractEvent $interactEvent) {
+        $p = $interactEvent->getPlayer();
+        $item = $interactEvent->getItem();
+        $itemname = $item->getName();
+        if ($itemname === "§r§aNavigator") {
+            $p->sendMessage(TextFormat::GREEN . "This feature is under development!");
         }
     }
 }
