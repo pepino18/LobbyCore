@@ -4,7 +4,7 @@ A LobbyCore for your PMMP server!
 ### Features
 
 > Lobby Items
-- [ ] Navigator
+- [x] Navigator
     - [ ] Config
     - [ ] Teleport Name
     - [ ] Infinite Slots
@@ -12,13 +12,13 @@ A LobbyCore for your PMMP server!
 - [ ] Fly
 
 > Events
-- [X] Custom Join and Leave Message
-- [X] No Break Block (Permission: lc.break)
-- [X] No Place Block (Permission: lc.place)
-- [X] No Drop Item (Permission: lc.drop)
+- [x] Custom Join and Leave Message
+- [ ] No Break Block (Permission: lc.break)
+- [ ] No Place Block (Permission: lc.place)
+- [ ] No Drop Item (Permission: lc.drop)
 
 > Server Side
-- [X] Only Proxy Join
+- [x] Only Proxy Join
 
 ### Support
 
