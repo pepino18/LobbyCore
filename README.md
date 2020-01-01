@@ -9,12 +9,19 @@ A LobbyCore for your PMMP server!
     - [ ] Teleport Name
     - [ ] Infinite Slots
 - [ ] Profile
-- [ ] Fly
+- [ ] Report System
+
+> Cosmetics
+- [ ] Particles
+- [ ] Gadgets
+
+> Commands
+- [x] Fly Command (Permission: lc.fly.command)
 
 > Events
 - [x] Custom Join and Leave Message
-- [ ] No Break Block (Permission: lc.break)
-- [ ] No Place Block (Permission: lc.place)
+- [x] No Break Block (Permission: lc.break)
+- [x] No Place Block (Permission: lc.place)
 - [ ] No Drop Item (Permission: lc.drop)
 
 > Server Side

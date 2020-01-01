@@ -18,8 +18,10 @@
 
 declare(strict_types=1);
 
-namespace TheRealKizu\events;
+namespace TheRealKizu\LobbyCore\events;
 
+use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\item\Item;
 use pocketmine\Player;
@@ -32,7 +34,8 @@ use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\level\sound\AnvilFallSound;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
-use TheRealKizu\LobbyCore;
+use TheRealKizu\LobbyCore\API;
+use TheRealKizu\LobbyCore\LobbyCore;
 
 class EventListener implements Listener {
 
@@ -46,6 +49,9 @@ class EventListener implements Listener {
         $this->main->getServer()->getPluginManager()->registerEvents($this, $main);
     }
 
+    /**
+     * @param PlayerJoinEvent $joinEvent
+     */
     public function onJoin(PlayerJoinEvent $joinEvent) {
         $p = $joinEvent->getPlayer();
         //Join Message
@@ -55,8 +61,8 @@ class EventListener implements Listener {
             $joinEvent->setJoinMessage("");
         }
         if ($cfg->get("enable-joinandleave") === "true") {
-            $joinMsg = str_replace(["{name}", "&"], [$joinEvent->getPlayer()->getName(), "§"], $cfg->get("join-message"));
-            $joinEvent->setJoinMessage($joinMsg);
+            $joinMsg = str_replace(["{name}"], [$joinEvent->getPlayer()->getName()], $cfg->get("join-message"));
+            $joinEvent->setJoinMessage(API::translateColors($joinMsg));
         }
 
         //Lobby Items
@@ -69,6 +75,9 @@ class EventListener implements Listener {
         $inv->setItem(4, $navigator);
     }
 
+    /**
+     * @param PlayerQuitEvent $quitEvent
+     */
     public function onQuit(PlayerQuitEvent $quitEvent) {
         $p = $quitEvent->getPlayer();
         $cfg = new Config($this->main->getDataFolder() . "config.yml", Config::YAML);
@@ -77,24 +86,30 @@ class EventListener implements Listener {
             $quitEvent->setQuitMessage("");
         }
         if ($cfg->get("enable-joinandleave") === "true") {
-            $quitMsg = str_replace(["{name}", "&"], [$quitEvent->getPlayer()->getName(), "§"], $cfg->get("leave-message"));
-            $quitEvent->setQuitMessage($quitMsg);
+            $quitMsg = str_replace(["{name}"], [$quitEvent->getPlayer()->getName()], $cfg->get("leave-message"));
+            $quitEvent->setQuitMessage(API::translateColors($quitMsg));
         }
     }
 
+    /**
+     * @param PlayerPreLoginEvent $preLoginEvent
+     */
     public function onNotProxyJoin(PlayerPreLoginEvent $preLoginEvent) {
         $p = $preLoginEvent->getPlayer();
         $cfg = new Config($this->main->getDataFolder() . "config.yml", Config::YAML);
         if ($cfg->get("enable-proxyjoin") === "false") return;
         if ($cfg->get("enable-proxyjoin") === "true") {
             if ($p->getAddress() !== $cfg->get("proxy-address")) {
-                $kickMsg = str_replace(["&"], ["§"], $cfg->get("proxy-kickmessage"));
-                $p->kick($kickMsg);
+                //$kickMsg = str_replace(["&"], ["§"], $cfg->get("proxy-kickmessage"));
+                $p->kick(API::translateColors($cfg->get("proxy-kickmessage")));
             }
         }
     }
     
     //ProjectileHP Code by LichKing112 <3
+    /**
+     * @param EntityDamageEvent $e
+     */
     public function onDamage(EntityDamageEvent $e){
         if ($e->getCause() === EntityDamageByEntityEvent::CAUSE_PROJECTILE){
             $player = $e->getDamager();
@@ -109,12 +124,42 @@ class EventListener implements Listener {
     }
 
     //Interact Event aka The Largest Event :P
+    /**
+     * @param PlayerInteractEvent $interactEvent
+     */
     public function onInteract(PlayerInteractEvent $interactEvent) {
         $p = $interactEvent->getPlayer();
         $item = $interactEvent->getItem();
         $itemname = $item->getName();
         if ($itemname === "§r§aNavigator") {
             $p->sendMessage(TextFormat::GREEN . "This feature is under development!");
+        }
+    }
+
+    // ----- [LOBBY PROTECTION] -----
+    /**
+     * @param BlockBreakEvent $blockBreakEvent
+     */
+    public function onBlockBreak(BlockBreakEvent $blockBreakEvent) {
+        $p = $blockBreakEvent->getPlayer();
+        if ($p->getLevel() === $this->main->getServer()->getDefaultLevel()) {
+            $blockBreakEvent->setCancelled(true);
+            if ($p->hasPermission("lc.break") || $p->isOp()) {
+                $blockBreakEvent->setCancelled(false);
+            }
+        }
+    }
+
+    /**
+     * @param BlockPlaceEvent $blockPlaceEvent
+     */
+    public function onBlockPlace(BlockPlaceEvent $blockPlaceEvent) {
+        $p = $blockPlaceEvent->getPlayer();
+        if ($p->getLevel() === $this->main->getServer()->getDefaultLevel()) {
+            $blockPlaceEvent->setCancelled(true);
+            if ($p->hasPermission("lc.place") || $p->isOp()) {
+                $blockPlaceEvent->setCancelled(false);
+            }
         }
     }
 }

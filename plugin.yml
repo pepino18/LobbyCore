@@ -3,3 +3,15 @@ author: TheRealKizu
 api: [3.0.0]
 version: 1.0.0
 main: TheRealKizu\LobbyCore
+
+# Extras
+website: https://therealkizu.tk
+
+# Permissions
+permissions:
+  lc.break:
+    default: op
+  lc.place:
+    default: op
+  lc.fly.command:
+    default: op
