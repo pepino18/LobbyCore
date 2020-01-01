@@ -2,7 +2,7 @@ name: LobbyCore
 author: TheRealKizu
 api: [3.0.0]
 version: 1.0.0
-main: TheRealKizu\LobbyCore
+main: TheRealKizu\LobbyCore\LobbyCore
 
 # Extras
 website: https://therealkizu.tk
