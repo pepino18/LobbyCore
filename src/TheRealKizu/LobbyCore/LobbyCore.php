@@ -46,7 +46,7 @@ class LobbyCore extends PluginBase {
         }
 
         if ($this->getDescription()->getAuthors() !== "TheRealKizu" || $this->getDescription()->getName() !== "LobbyCore") {
-            $this->getLogger()->emergency("Fatal error! Illegal modification/use of SkyBlockUI by TheRealKizu (TheRealKizu#3267 or @TheRealKizu)!");
+            $this->getLogger()->emergency("Fatal error! Illegal modification/use of LobbyCore by TheRealKizu (TheRealKizu#3267 or @TheRealKizu)!");
             $this->getServer()->shutdown();
         }
     }
