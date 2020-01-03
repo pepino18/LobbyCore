@@ -71,7 +71,7 @@ class LobbyCore extends PluginBase {
         $this->getLogger()->debug("Registered 1 command(s)");
     }
 
-    public function getInstance() {
+    public function getInstance() : self {
         return self::$instance;
     }
 
