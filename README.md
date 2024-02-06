@@ -22,7 +22,7 @@ A LobbyCore for your PMMP server!
 - [x] Custom Join and Leave Message
 - [x] No Break Block (Permission: lc.break)
 - [x] No Place Block (Permission: lc.place)
-- [ ] No Drop Item (Permission: lc.drop)
+- [x] No Drop Item (Permission: lc.drop)
 
 > Server Side
 - [x] Only Proxy Join
